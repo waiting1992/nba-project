@@ -6,7 +6,7 @@ from info.models import Player, Team, Coach
 class PlayerAdmin(admin.ModelAdmin):
 	fieldsets = [
 			('个人信息', {'fields': ['first_name', 'last_name', 'age', 'birthday', 'height', 'weight', 'country', 'city', 'school' ]}),
-			('球员信息', {'fields':['ageToNBA', 'timeToNBA','talentShow']}),
+			('球员信息', {'fields':['ageToNBA', 'timeToNBA','talentShow', 'currentTeam']}),
 			]
 	list_display = ('first_name', 'last_name', 'city', 'height', 'currentTeam', 'highestScore')
 	list_filter = ['currentTeam', 'city']
@@ -19,9 +19,13 @@ class CoachAdmin(admin.TabularInline):
 	extra = 3
 
 class TeamAdmin(admin.ModelAdmin):
-	fields = ['name','city']
+	fieldsets = [
+			('基本信息', {'fields':['name']}),
+			('地理信息', {'fields':['city', 'boss', 'gymnasium']}),
+			('比赛信息', {'fields':['section', 'timeToNBA', 'numOfChampion', 'players']}),
+			]
 	inlines = [CoachAdmin]
 
-	list_display = ('name', 'city' )
+	list_display = ('name', 'city', 'gymnasium', 'section' )
 
 admin.site.register(Team, TeamAdmin)
