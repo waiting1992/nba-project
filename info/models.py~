@@ -1,0 +1,62 @@
+#coding:utf8
+
+from django.db import models
+
+# Create your models here.
+
+class Team(models.Model):
+	name = models.CharField(verbose_name='姓名', max_length=30)
+	city = models.CharField(verbose_name='所在地', max_length=30)
+	section = models.CharField(verbose_name='赛季', max_length=30)
+	boss = models.CharField(verbose_name='经理', max_length=30)
+	gymnasium = models.CharField(verbose_name='体育馆', max_length=30)
+	timeToNBA = models.TimeField(verbose_name='成立时间')
+	numOfChampion = models.IntegerField(verbose_name='获得总冠军次数')
+	#players = models.ManyToManyFirld(Player)
+
+	
+
+
+class Player(models.Model):
+	ID = models.CharField(max_length=10, primary_key=True)
+	first_name = models.CharField(max_length=20)
+	last_name = models.CharField(max_length=20)
+	suffix = models.CharField(max_length=10)
+	age = models.IntegerField()
+	number = models.IntegerField()
+	team = models.ForeignKey(Team)
+	country = models.CharField(max_length=30)
+	city = models.CharField(max_length=30)
+	height = models.CharField(max_length=10)
+	weight = models.CharField(max_length=10)
+	ageToNBA = models.CharField(max_length=10)
+	timeToNBA = models.TimeField()
+	talentShow = models.TextField()
+	highestScore = models.IntegerField()
+
+class StrokeAnalysis(models.Model):
+	ID = models.ForeignKey(Player)
+	season = models.CharField(max_length=10)
+	team = models.ForeignKey(Team)
+	shooting = models.CharField(max_length=10)
+	threePS = models.CharField(max_length=10)
+	penaltyShot = models.CharField(max_length=10)
+	pRebounds = models.FloatField()
+	bRebounds = models.FloatField()
+	tRebounds = models.FloatField()
+	assists = models.FloatField()
+	steals = models.FloatField()
+	blocks = models.FloatField()
+	mistakes = models.FloatField()
+	fouls = models.FloatField()
+	points = models.FloatField()
+
+class Coach(models.Model):
+	first_name = models.CharField(max_length=20)
+	last_name = models.CharField(max_length=20)
+	suffix = models.CharField(max_length=10)
+	birthday = models.DateField()
+	team = models.ForeignKey(Team)
+
+
+
