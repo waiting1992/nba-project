@@ -36,7 +36,7 @@ class Player(models.Model):
 	image = models.ImageField(upload_to='player',verbose_name='球员相片', null=True, blank=True)
 	first_name = models.CharField(max_length=20,verbose_name='名字')
 	last_name = models.CharField(max_length=20,verbose_name='姓氏')
-	suffix = models.CharField(max_length=10,verbose_name='教名',null=True, blank=True)
+	suffix = models.CharField(max_length=10,verbose_name='教名', blank=True)
 	age = models.IntegerField(verbose_name='年龄', null=True, blank=True)
 	birthday = models.DateField(verbose_name='生日', null=True, blank=True)
 	height = models.CharField(max_length=10,verbose_name='身高', null=True, blank=True)
