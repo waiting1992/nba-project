@@ -4,10 +4,31 @@ from django.db import models
 
 # Create your models here.
 
-class StrokeAnalysis(models.Model):
-	name = models.CharField(max_length=30,verbose_name='球员')
+class Team(models.Model):
+	image = models.ImageField(upload_to='team',verbose_name='队徽')
+	name = models.CharField(primary_key=True,max_length=30,verbose_name='队名')
+	city = models.CharField(max_length=30,verbose_name='城市')
+	section = models.CharField(max_length=30,verbose_name='分区')
+	boss = models.CharField(max_length=30,verbose_name='老板')
+	gymnasium = models.CharField(max_length=30,verbose_name='主场')
+	timeToNBA = models.CharField(max_length=10,verbose_name='进入NBA')
+	numOfChampion = models.IntegerField(verbose_name='总冠军数')
+
+	def __unicode__(self):
+		return self.name
+
+class LastTeam(models.Model):
+	team_name = models.ForeignKey(Team,verbose_name='球队')
 	season = models.CharField(max_length=10,verbose_name='赛季')
-	team = models.CharField(max_length=15,verbose_name='所在球队')
+
+	def __unicode__(self):
+		return u'%s %s'%(self.team_name,self.season)
+
+class StrokeAnalysis(models.Model):
+	SA_id = models.AutoField(primary_key=True,verbose_name='技术统计编号')
+#	name = models.CharField(max_length=30,verbose_name='球员')
+	season = models.CharField(max_length=10,verbose_name='赛季')
+	team = models.ForeignKey(Team,verbose_name='所在球队')
 	shooting = models.CharField(max_length=10,verbose_name='投篮')
 	threePS = models.CharField(max_length=10,verbose_name='三分')
 	penaltyShot = models.CharField(max_length=10,verbose_name='罚球')
@@ -22,55 +43,36 @@ class StrokeAnalysis(models.Model):
 	points = models.FloatField(verbose_name='得分')
 	
 	def __unicode__(self):
-		return u'%s %s'%(self.name,self.season)
+		return u'%d'%(self.SA_id,)
 
-class LastTeam(models.Model):
-	name = models.CharField(max_length=50,verbose_name='球员或教练')
-	time = models.CharField(max_length=10,verbose_name='时间段')
-	team = models.CharField(max_length=20,verbose_name='球队')
-	
-	def __unicode__(self):
-		return u'%s %s'%(self.name,self.time)
 
 class Player(models.Model):
-	image = models.ImageField(upload_to='player',verbose_name='球员相片', null=True, blank=True)
+	image = models.ImageField(upload_to='player',verbose_name='球员相片')
+	player_id = models.AutoField(primary_key=True,verbose_name='球员编号')
 	first_name = models.CharField(max_length=20,verbose_name='名字')
 	last_name = models.CharField(max_length=20,verbose_name='姓氏')
-	suffix = models.CharField(max_length=10,verbose_name='教名', blank=True)
-	age = models.IntegerField(verbose_name='年龄', null=True, blank=True)
-	birthday = models.DateField(verbose_name='生日', null=True, blank=True)
-	height = models.CharField(max_length=10,verbose_name='身高', null=True, blank=True)
-	weight = models.CharField(max_length=10,verbose_name='体重', null=True, blank=True)
-	country = models.CharField(max_length=30,verbose_name='国家', null=True, blank=True)
-	city = models.CharField(max_length=30,verbose_name='城市', null=True, blank=True)
-	school = models.CharField(max_length=30,verbose_name='毕业学校', null=True, blank=True)
-	ageToNBA = models.CharField(max_length=10,verbose_name='NBA球龄', null=True, blank=True)
-	timeToNBA = models.CharField(max_length=10,verbose_name='进入NBA', null=True, blank=True)
-	talentShow = models.TextField(verbose_name='选秀情况', null=True, blank=True)
-	currentTeam = models.CharField(max_length=20,verbose_name='现役球队', null=True, blank=True)
-	lastTeam = models.ManyToManyField(LastTeam,verbose_name='过去所在过的球队', null=True, blank=True)
-	number = models.IntegerField(verbose_name='号码', null=True, blank=True)
-	highestScore = models.IntegerField(verbose_name='生涯最高分', null=True, blank=True)
-	strokeAnalysis = models.ManyToManyField(StrokeAnalysis,verbose_name='技术统计', null=True, blank=True)
-
-	def __unicode__(self):
-		return u'%s %s %s'%(self.first_name,self.suffix,self.last_name)
-class Team(models.Model):
-	image = models.ImageField(upload_to='team',verbose_name='队徽')
-	name = models.CharField(max_length=30,verbose_name='姓名')
+	suffix = models.CharField(max_length=10,verbose_name='教名',null=True)
+	age = models.IntegerField(verbose_name='年龄')
+	birthday = models.DateField(verbose_name='生日')
+	height = models.CharField(max_length=10,verbose_name='身高')
+	weight = models.CharField(max_length=10,verbose_name='体重')
+	country = models.CharField(max_length=30,verbose_name='国家')
 	city = models.CharField(max_length=30,verbose_name='城市')
-	section = models.CharField(max_length=30,verbose_name='分区')
-	boss = models.CharField(max_length=30,verbose_name='老板')
-	gymnasium = models.CharField(max_length=30,verbose_name='主场')
+	school = models.CharField(max_length=30,verbose_name='毕业学校')
+	ageToNBA = models.CharField(max_length=10,verbose_name='NBA球龄')
 	timeToNBA = models.CharField(max_length=10,verbose_name='进入NBA')
-	numOfChampion = models.IntegerField(verbose_name='总冠军数')
-	players = models.ManyToManyField(Player,verbose_name='队员')
+	talentShow = models.TextField(verbose_name='选秀情况')
+	currentTeam = models.ForeignKey(Team,verbose_name='现役球队')
+	lastTeam = models.ManyToManyField(LastTeam,verbose_name='过去所在过的球队')
+	number = models.IntegerField(verbose_name='号码')
+	highestScore = models.IntegerField(verbose_name='生涯最高分')
+	strokeanalysis = models.ManyToManyField(StrokeAnalysis,verbose_name='技术统计')
 
 	def __unicode__(self):
-		return self.name
-
+		return u'%s %s %s %d'%(self.first_name,self.suffix,self.last_name,self.player_id)
 
 class Coach(models.Model):
+	coach_id = models.AutoField(primary_key=True,verbose_name='教练编号')
 	first_name = models.CharField(max_length=20,verbose_name='名字')
 	last_name = models.CharField(max_length=20,verbose_name='姓氏')
 	suffix = models.CharField(max_length=10,verbose_name='教名',null=True)
@@ -79,9 +81,6 @@ class Coach(models.Model):
 	team = models.ManyToManyField(LastTeam,verbose_name='曾经执教球队')
 
 	def __unicode__(self):
-		return u'%s %s %s' %(self.first_name,self.suffix,self.last_name)
+		return u'%d %s %s %s' %(self.coach_id,self.first_name,self.suffix,self.last_name)
 	
-
-
-
 
