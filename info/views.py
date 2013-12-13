@@ -8,7 +8,7 @@ def index(request):
 
 def player(request, player_id):
 	player = get_object_or_404( Player, pk = player_id)
-	return render(request, 'player/player_detail.html', {'player':'player'})
+	return render(request, 'player/player_detail.html', {'player':player})
 
 def team(request, team_id):
 	team = get_object_or_404( Team, pk=team_id)

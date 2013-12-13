@@ -32,17 +32,18 @@
           <th>NumOfChampion</th>
 	  <td>{{team.numOfChampion}}</td>
        </tr>
+	   <tr>
+		   <th>Coach</th>
+		   {% for coach in team.coach_set.all %}
+		   <td>{{coach.first_name}} {{coach.last_name}}</td>
+		   {% endfor %}
+	   </tr>
    </table>
-   <h2>The battle formation</h2>
-   <ul>
-	<form action="{% url 'info:team' team.id }" method="post">
-	{% csrf_token %}
-	{% for player in team.coach_set.all %}
-		<input type="radio" name="coach" id="coach{{ forloop.counter }}" value="{{coach.id}}" />
-		<label for="coach{{forloop.counter}}"> {{ coach.name }} </label><br />
+   <h2>Player</h2>
+	{% for player in team.player_set.all %}
+	<a href="{% url 'info:player' player.Player_id %}">
+		{{player.first_name}} {{player.last_name}} </a>
+		<br />
 	{% endfor %}
-	<input type="submit" value="coach" />
-	</form>
-   </ul>
 </body>
 </html>
