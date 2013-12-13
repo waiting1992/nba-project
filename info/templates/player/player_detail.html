@@ -1,0 +1,81 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang='en' xml:lang="en">
+<head>
+    <title>{{player.first_name}} {{player.last_name}}</title>
+</head>
+<body>
+    <h1>{{player.first_name}} {{player.last_name}}</h1>
+    <table>
+        <tr>
+	   <th>Age</th>
+	   <td>{{player.age}}</td>
+	   <th>Number</th>
+	   <td>{{player.number}}</td>
+	</tr>
+	<tr>
+	   <th>Team</th>
+	   <td>{{player.team}}</td>
+	   <th>Position</th>
+	   <td>{{player.position}}</td>
+	</tr>
+        <tr>
+	   <th>Country</th>
+	   <td>{{player.country}}</td>
+	   <th>City</th>
+	   <td>{{player.city}}</td>
+	</tr>
+	<tr>
+	   <th>Height</th>
+	   <td>{{player.height}}</td>
+	   <th>Weight</th>
+	   <td>{{player.weight}}</td>
+	</tr>
+	<tr>
+	   <th>Age To NBA</th>
+           <td>{{player.ageToNBA}}</td>
+	   <th>Time To NBA<th>
+	   <td>{{player.timeToNBA}}</td>
+	</tr>
+	<tr>
+	   <th>Talent Show</th>
+	   <td>{{player.talentShow}}</td>
+	   <th>Highest Score</th>
+	   <td>{{player.highestScore}}</td>
+	</tr>
+    </table>
+    <h1>The StrokeAnalysis</h1>
+    <table>
+        <tr>
+	   <th>Season</th>
+	   <th>Team</th>
+	   <th>Shooting</th>
+	   <th>Three Point Scores</th>
+	   <th>Penalty Shot</th>
+	   <th>Offensive Rebound</th>
+	   <th>Defensive Rebound</th>
+	   <th>Assists</th>
+	   <th>Steals</th>
+	   <th>Blocks</th>
+	   <th>Mistakes</th>
+	   <th>Fouls</th>
+	   <th>Points</th>
+	</tr>
+        {% for season in season_list %}
+	   <td>{{season}}</td>
+	   <td>{{team}}</td>
+	   <td>{{shooting}}</td>
+	   <td>{{threePS}}</td>
+	   <td>{{penaltyShot}}</td>
+	   <td>{{pRebounds}}</td>
+	   <td>{{bRebounds}}</td>
+	   <td>{{assists}}</td>
+	   <td>{{steals}}</td>
+	   <td>{{blocks}}</td>
+	   <td>{{mistakes}}</td>
+	   <td>{{fouls}}</td>
+	   <td>{{points}}</td>
+	{% endfor %}
+    </table>
+</body>
+</html>

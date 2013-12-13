@@ -1,12 +1,48 @@
-<h1>
-	{{team.name}}
-</h1>
-
-<form action="{% url 'info:team' team.id }" method="post">
-{% csrf_token %}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang='en' xml:lang="en">
+<head>
+    <title>{{team.name}}</title>
+</head>
+<body>
+   <h1>{{team.name}}</h1>
+   <h2>The information of {{team.name}}:</h2>
+   <table>
+       <tr>
+          <th>City</th>
+	  <td>{{team.city}}</td>
+       </tr>
+       <tr>
+          <th>Section</th>
+	  <td>{{team.section}}</td>
+       </tr>
+       <tr>
+          <th>Boss</th>
+	  <td>{{team.boss}}</td>
+       </tr>
+       <tr>
+          <th>Gymnasium</th>
+		  <td>{{team.gynasium}}</td>
+       </tr>
+       <tr>
+          <th>TimetoNBA</th>
+	  <td>{{team.timetoNBA}}</td>
+       </tr>
+       <tr>
+          <th>NumOfChampion</th>
+	  <td>{{team.numOfChampion}}</td>
+       </tr>
+   </table>
+   <h2>The battle formation</h2>
+   <ul>
+	<form action="{% url 'info:team' team.id }" method="post">
+	{% csrf_token %}
 	{% for player in team.coach_set.all %}
 		<input type="radio" name="coach" id="coach{{ forloop.counter }}" value="{{coach.id}}" />
 		<label for="coach{{forloop.counter}}"> {{ coach.name }} </label><br />
 	{% endfor %}
-<input type="submit" value="coach" />
-</form>
+	<input type="submit" value="coach" />
+	</form>
+   </ul>
+</body>
+</html>

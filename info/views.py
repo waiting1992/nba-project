@@ -1,13 +1,14 @@
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
-from info.models import Team
+from info.models import Team, Player
 # Create your views here.
 
 def index(request):
 	return render(request, 'index.html', {})
 
 def player(request, player_id):
-	return HttpResponse("You're looking at player %s" %player_id)
+	player = get_object_or_404( Player, pk = player_id)
+	return render(request, 'player/player_detail.html', {'player':'player'})
 
 def team(request, team_id):
 	team = get_object_or_404( Team, pk=team_id)

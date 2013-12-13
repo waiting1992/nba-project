@@ -5,8 +5,10 @@ from django.db import models
 # Create your models here.
 
 class Team(models.Model):
+	Team_id = models.AutoField(primary_key=True,
+			verbose_name='球队编号')
 	image = models.ImageField(upload_to='team',verbose_name='队徽')
-	name = models.CharField(primary_key=True,max_length=30,verbose_name='队名')
+	name = models.CharField(max_length=30,verbose_name='队名')
 	city = models.CharField(max_length=30,verbose_name='城市')
 	section = models.CharField(max_length=30,verbose_name='分区')
 	boss = models.CharField(max_length=30,verbose_name='老板')
@@ -18,6 +20,8 @@ class Team(models.Model):
 		return self.name
 
 class LastTeam(models.Model):
+	LA_id = models.AutoField(primary_key=True,
+			verbose_name='服役球队编号')
 	team_name = models.ForeignKey(Team,verbose_name='球队')
 	season = models.CharField(max_length=10,verbose_name='赛季')
 
@@ -47,8 +51,9 @@ class StrokeAnalysis(models.Model):
 
 
 class Player(models.Model):
+	Player_id = models.AutoField(primary_key=True, 
+			verbose_name='球员编号' )
 	image = models.ImageField(upload_to='player',verbose_name='球员相片')
-	player_id = models.AutoField(primary_key=True,verbose_name='球员编号')
 	first_name = models.CharField(max_length=20,verbose_name='名字')
 	last_name = models.CharField(max_length=20,verbose_name='姓氏')
 	suffix = models.CharField(max_length=10,verbose_name='教名',null=True)
@@ -66,21 +71,23 @@ class Player(models.Model):
 	lastTeam = models.ManyToManyField(LastTeam,verbose_name='过去所在过的球队')
 	number = models.IntegerField(verbose_name='号码')
 	highestScore = models.IntegerField(verbose_name='生涯最高分')
-	strokeanalysis = models.ManyToManyField(StrokeAnalysis,verbose_name='技术统计')
+	strokeanalysis = models.ManyToManyField(StrokeAnalysis,
+			verbose_name='技术统计', null=True, blank=True)
 
 	def __unicode__(self):
-		return u'%s %s %s %d'%(self.first_name,self.suffix,self.last_name,self.player_id)
+		return u'%s %s %s %d'%(self.first_name,self.suffix,self.last_name,self.Player_id)
 
 class Coach(models.Model):
-	coach_id = models.AutoField(primary_key=True,verbose_name='教练编号')
+	Coach_id = models.AutoField(primary_key=True,verbose_name='教练编号')
 	first_name = models.CharField(max_length=20,verbose_name='名字')
 	last_name = models.CharField(max_length=20,verbose_name='姓氏')
 	suffix = models.CharField(max_length=10,verbose_name='教名',null=True)
 	birthday = models.DateField(verbose_name='生日')
 	currentTeam = models.ForeignKey(Team,verbose_name='目前执教球队')
-	team = models.ManyToManyField(LastTeam,verbose_name='曾经执教球队')
+	team = models.ManyToManyField(LastTeam,verbose_name='曾经执教球队',
+			null=True, blank=True)
 
 	def __unicode__(self):
-		return u'%d %s %s %s' %(self.coach_id,self.first_name,self.suffix,self.last_name)
+		return u'%d %s %s %s' %(self.Coach_id,self.first_name,self.suffix,self.last_name)
 	
 
