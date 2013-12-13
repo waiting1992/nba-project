@@ -22,11 +22,11 @@
        </tr>
        <tr>
           <th>Gymnasium</th>
-		  <td>{{team.gynasium}}</td>
+		  <td>{{team.gymnasium}}</td>
        </tr>
        <tr>
           <th>TimetoNBA</th>
-	  <td>{{team.timetoNBA}}</td>
+	  <td>{{team.timeToNBA}}</td>
        </tr>
        <tr>
           <th>NumOfChampion</th>
@@ -35,7 +35,8 @@
 	   <tr>
 		   <th>Coach</th>
 		   {% for coach in team.coach_set.all %}
-		   <td>{{coach.first_name}} {{coach.last_name}}</td>
+		   <td><a href={% url "info:coach" coach.Coach_id %}>
+				   {{coach.first_name}} {{coach.last_name}}</a></td>
 		   {% endfor %}
 	   </tr>
    </table>

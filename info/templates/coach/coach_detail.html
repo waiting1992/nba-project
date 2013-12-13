@@ -1,0 +1,32 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang='en' xml:lang="en">
+<head>
+    <title>{{coach.first_name}} {{coach.last_name}}</title>
+</head>
+<body>
+    <h1>{{coach.first_name}} {{coach.last_name}}</h1>
+    <table>
+    <tr>
+	   <th>Birthday</th>
+	   <td>{{coach.birthday}}</td>
+   </tr>
+   <tr>
+	   <th>currentTeam</th>
+	   <td>{{coach.currentTeam.name}}</td>
+	</tr>
+	
+    </table>
+    <h1>Team Coached Before</h1>
+    <table>
+    <tr>
+	   <th>Season</th>
+	   <th>Team</th>
+	</tr>
+        {% for team in coach.team.all %}
+	   <td>{{team.season}}</td>
+	   <td>{{team.team_name.name}}</td>
+	{% endfor %}
+    </table>
+</body>
+</html>

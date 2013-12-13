@@ -46,7 +46,7 @@
     </table>
     <h1>The StrokeAnalysis</h1>
     <table>
-        <tr>
+    <tr>
 	   <th>Season</th>
 	   <th>Team</th>
 	   <th>Shooting</th>
@@ -61,20 +61,20 @@
 	   <th>Fouls</th>
 	   <th>Points</th>
 	</tr>
-        {% for season in season_list %}
-	   <td>{{season}}</td>
-	   <td>{{team}}</td>
-	   <td>{{shooting}}</td>
-	   <td>{{threePS}}</td>
-	   <td>{{penaltyShot}}</td>
-	   <td>{{pRebounds}}</td>
-	   <td>{{bRebounds}}</td>
-	   <td>{{assists}}</td>
-	   <td>{{steals}}</td>
-	   <td>{{blocks}}</td>
-	   <td>{{mistakes}}</td>
-	   <td>{{fouls}}</td>
-	   <td>{{points}}</td>
+        {% for sa in player.strokeanalysis.all %}
+	   <td>{{sa.season}}</td>
+	   <td>{{sa.team}}</td>
+	   <td>{{sa.shooting}}</td>
+	   <td>{{sa.threePS}}</td>
+	   <td>{{sa.penaltyShot}}</td>
+	   <td>{{sa.pRebounds}}</td>
+	   <td>{{sa.bRebounds}}</td>
+	   <td>{{sa.assists}}</td>
+	   <td>{{sa.steals}}</td>
+	   <td>{{sa.blocks}}</td>
+	   <td>{{sa.mistakes}}</td>
+	   <td>{{sa.fouls}}</td>
+	   <td>{{sa.points}}</td>
 	{% endfor %}
     </table>
 </body>
