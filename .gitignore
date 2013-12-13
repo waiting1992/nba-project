@@ -4,6 +4,7 @@ __pycache__/
 
 # vim swap file
 .gitignore~
+*~
 
 # C extensions
 *.so
