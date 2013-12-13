@@ -5,8 +5,7 @@ from django.db import models
 # Create your models here.
 
 class Team(models.Model):
-	Team_id = models.AutoField(primary_key=True,
-			verbose_name='球队编号')
+	Team_id = models.AutoField(primary_key=True,verbose_name='球队编号')
 	image = models.ImageField(upload_to='team',verbose_name='队徽')
 	name = models.CharField(max_length=30,verbose_name='队名')
 	city = models.CharField(max_length=30,verbose_name='城市')
@@ -15,13 +14,14 @@ class Team(models.Model):
 	gymnasium = models.CharField(max_length=30,verbose_name='主场')
 	timeToNBA = models.CharField(max_length=10,verbose_name='进入NBA')
 	numOfChampion = models.IntegerField(verbose_name='总冠军数')
+	briefIntroduction = models.TextField(verbose_name='球队简介')
 
 	def __unicode__(self):
 		return self.name
 
 class LastTeam(models.Model):
 	LA_id = models.AutoField(primary_key=True,
-			verbose_name='服役球队编号')
+			verbose_name='服役/执教球队编号')
 	team_name = models.ForeignKey(Team,verbose_name='球队')
 	season = models.CharField(max_length=10,verbose_name='赛季')
 
@@ -51,8 +51,7 @@ class StrokeAnalysis(models.Model):
 
 
 class Player(models.Model):
-	Player_id = models.AutoField(primary_key=True, 
-			verbose_name='球员编号' )
+	Player_id = models.AutoField(primary_key=True, verbose_name='球员编号' )
 	image = models.ImageField(upload_to='player',verbose_name='球员相片')
 	first_name = models.CharField(max_length=20,verbose_name='名字')
 	last_name = models.CharField(max_length=20,verbose_name='姓氏')
@@ -73,6 +72,7 @@ class Player(models.Model):
 	highestScore = models.IntegerField(verbose_name='生涯最高分')
 	strokeanalysis = models.ManyToManyField(StrokeAnalysis,
 			verbose_name='技术统计', null=True, blank=True)
+	briefIntroduction = models.TextField(verbose_name='球员简介')
 
 	def __unicode__(self):
 		return u'%s %s %s %d'%(self.first_name,self.suffix,self.last_name,self.Player_id)
@@ -86,6 +86,7 @@ class Coach(models.Model):
 	currentTeam = models.ForeignKey(Team,verbose_name='目前执教球队')
 	team = models.ManyToManyField(LastTeam,verbose_name='曾经执教球队',
 			null=True, blank=True)
+	briefIntroduction = models.TextField(verbose_name='教练简介')
 
 	def __unicode__(self):
 		return u'%d %s %s %s' %(self.Coach_id,self.first_name,self.suffix,self.last_name)
