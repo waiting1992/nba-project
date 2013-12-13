@@ -6,7 +6,7 @@ from django.db import models
 
 class Team(models.Model):
 	image = models.ImageField(upload_to='team',verbose_name='队徽')
-	name = models.CharField(primary_key=True,max_length=30,verbose_name='队名')
+	name = models.CharField(max_length=30,verbose_name='队名')
 	city = models.CharField(max_length=30,verbose_name='城市')
 	section = models.CharField(max_length=30,verbose_name='分区')
 	boss = models.CharField(max_length=30,verbose_name='老板')
