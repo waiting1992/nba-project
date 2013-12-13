@@ -1,0 +1,12 @@
+<h1>
+	{{team.name}}
+</h1>
+
+<form action="{% url 'info:team' team.id }" method="post">
+{% csrf_token %}
+	{% for player in team.coach_set.all %}
+		<input type="radio" name="coach" id="coach{{ forloop.counter }}" value="{{coach.id}}" />
+		<label for="coach{{forloop.counter}}"> {{ coach.name }} </label><br />
+	{% endfor %}
+<input type="submit" value="coach" />
+</form>

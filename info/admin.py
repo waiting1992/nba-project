@@ -1,7 +1,7 @@
 #coding:utf-8
 
 from django.contrib import admin
-from info.models import Player, Team, Coach
+from info.models import Player, Team, Coach, LastTeam
 
 class PlayerAdmin(admin.ModelAdmin):
 	fieldsets = [
@@ -29,3 +29,12 @@ class TeamAdmin(admin.ModelAdmin):
 	list_display = ('name', 'city', 'gymnasium', 'section' )
 
 admin.site.register(Team, TeamAdmin)
+
+class LastTeamAdmin(admin.ModelAdmin):
+	fieldsets = [
+			('', {'fields':['name']}),
+			('比赛信息', {'fields':['time', 'team']})
+			]
+	list_display = ('name', 'team', 'time' )
+
+admin.site.register(LastTeam, LastTeamAdmin)

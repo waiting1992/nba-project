@@ -1,0 +1,44 @@
+body{
+        font-family: Verdana, Geneva, Arial, sans-serif;	
+	font-size: medium;
+	background-color: #ffd200;
+	}
+h1, h2{
+        font-weight: normal;
+	color: #cc6600;
+	border-bottom: thin dotted #888888;
+	}
+h1{
+	font-size: 170%;
+	}
+h2{
+	font-size: 130%;
+	}
+table{
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 100px;
+	margin-bottom: 50px;
+	border: thin solid black;
+	caption-side: bottom;
+	border-collapse: collapse;
+	}
+td, th{
+        border:thin solid gray;
+	padding: 10px;
+	text-align: center;
+	}
+th{
+	color: white;
+	background-color: #861700;
+	}
+td{
+	background-color: #ffefbc;
+	}
+.Area{
+	background-color: #ff4500;
+	}
+caption{
+	font-style: italic;
+	padding-top: 8px;
+	}
