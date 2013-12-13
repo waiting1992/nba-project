@@ -75,7 +75,7 @@ class Player(models.Model):
 	briefIntroduction = models.TextField(verbose_name='球员简介')
 
 	def __unicode__(self):
-		return u'%s %s %s %d'%(self.first_name,self.suffix,self.last_name,self.Player_id)
+		return u'%s %s %s %d'%(self.Player_id, self.first_name,self.suffix,self.last_name)
 
 class Coach(models.Model):
 	Coach_id = models.AutoField(primary_key=True,verbose_name='教练编号')
